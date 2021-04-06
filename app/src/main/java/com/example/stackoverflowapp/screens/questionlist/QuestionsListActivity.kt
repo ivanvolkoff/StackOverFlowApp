@@ -7,6 +7,7 @@ import com.example.stackoverflowapp.Constants
 import com.example.stackoverflowapp.networking.StackOverflowApi
 import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
 import com.example.stackoverflowapp.questions.Question
+import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
 import com.example.stackoverflowapp.screens.common.dialogs.ServerErrorDialogFragment
 import com.example.stackoverflowapp.screens.questiondetails.QuestionDetailsActivity
 import kotlinx.coroutines.*
@@ -21,6 +22,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
     private var isDataLoaded = false
     private lateinit var viewMvc: QuestionsListViewMvc
     private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
+    private lateinit var dialogsNavigator : DialogsNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         setContentView(viewMvc.rootView)
         fetchQuestionsUseCase = FetchQuestionsUseCase()
         // init retrofit
+        dialogsNavigator = DialogsNavigator(supportFragmentManager)
 
     }
 
@@ -65,9 +68,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
 
 
     private fun onFetchFailed() {
-        supportFragmentManager.beginTransaction()
-            .add(ServerErrorDialogFragment.newInstance(), null)
-            .commitAllowingStateLoss()
+     dialogsNavigator.showServerErrorDialog()
     }
 
 
