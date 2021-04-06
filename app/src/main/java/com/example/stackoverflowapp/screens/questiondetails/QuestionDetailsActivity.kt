@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.stackoverflowapp.Constants
+import com.example.stackoverflowapp.MyApplication
 import com.example.stackoverflowapp.R
 import com.example.stackoverflowapp.networking.StackOverflowApi
 import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
@@ -38,7 +39,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
         super.onCreate(savedInstanceState)
         questionDetailsMvc = QuestionDetailsViewMvc(LayoutInflater.from(this), null)
         setContentView(questionDetailsMvc.rootView)
-        fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase()
+        fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase((application as MyApplication).retrofit)
         // retrieve question ID passed from outside
         questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
         dialogsNavigator = DialogsNavigator(supportFragmentManager)

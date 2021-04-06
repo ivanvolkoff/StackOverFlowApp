@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.example.stackoverflowapp.Constants
+import com.example.stackoverflowapp.MyApplication
 import com.example.stackoverflowapp.networking.StackOverflowApi
 import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
 import com.example.stackoverflowapp.questions.Question
@@ -31,7 +32,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         viewMvc = QuestionsListViewMvc(LayoutInflater.from(this), null)
 
         setContentView(viewMvc.rootView)
-        fetchQuestionsUseCase = FetchQuestionsUseCase()
+        fetchQuestionsUseCase = FetchQuestionsUseCase((application as MyApplication).retrofit)
         // init retrofit
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
         screensNavigator = ScreensNavigator(this)
