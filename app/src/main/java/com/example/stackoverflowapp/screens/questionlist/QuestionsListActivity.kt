@@ -9,6 +9,7 @@ import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
 import com.example.stackoverflowapp.questions.Question
 import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
 import com.example.stackoverflowapp.screens.common.dialogs.ServerErrorDialogFragment
+import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
 import com.example.stackoverflowapp.screens.questiondetails.QuestionDetailsActivity
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
@@ -22,7 +23,8 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
     private var isDataLoaded = false
     private lateinit var viewMvc: QuestionsListViewMvc
     private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
-    private lateinit var dialogsNavigator : DialogsNavigator
+    private lateinit var dialogsNavigator: DialogsNavigator
+    private lateinit var screensNavigator: ScreensNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         fetchQuestionsUseCase = FetchQuestionsUseCase()
         // init retrofit
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
+        screensNavigator = ScreensNavigator(this)
 
     }
 
@@ -68,7 +71,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
 
 
     private fun onFetchFailed() {
-     dialogsNavigator.showServerErrorDialog()
+        dialogsNavigator.showServerErrorDialog()
     }
 
 
@@ -77,7 +80,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
     }
 
     override fun onQuestionClicked(clickedQuestion: Question) {
-        QuestionDetailsActivity.start(this, clickedQuestion.id)
+        screensNavigator.toQuestionDetails(clickedQuestion.id)
     }
 
 
