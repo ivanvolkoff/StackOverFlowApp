@@ -1,22 +1,15 @@
 package com.example.stackoverflowapp.screens.questionlist
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import com.example.stackoverflowapp.Constants
-import com.example.stackoverflowapp.MyApplication
-import com.example.stackoverflowapp.networking.StackOverflowApi
 import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
 import com.example.stackoverflowapp.questions.Question
+import com.example.stackoverflowapp.screens.common.activities.BaseActivity
 import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
-import com.example.stackoverflowapp.screens.common.dialogs.ServerErrorDialogFragment
 import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
-import com.example.stackoverflowapp.screens.questiondetails.QuestionDetailsActivity
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
-class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener {
+class QuestionsListActivity : BaseActivity(), QuestionsListViewMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
@@ -32,8 +25,8 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         viewMvc = QuestionsListViewMvc(LayoutInflater.from(this), null)
 
         setContentView(viewMvc.rootView)
-        fetchQuestionsUseCase = FetchQuestionsUseCase((application as MyApplication).retrofit)
-        // init retrofit
+        fetchQuestionsUseCase = compositionRoot.fetchQuestionsUseCase
+
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
         screensNavigator = ScreensNavigator(this)
 

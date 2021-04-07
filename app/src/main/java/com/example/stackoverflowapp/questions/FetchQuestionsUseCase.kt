@@ -9,14 +9,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.coroutines.cancellation.CancellationException
 
 class FetchQuestionsUseCase(
-    retrofit: Retrofit
-) {
+    private val stackoverflowApi: StackOverflowApi) {
     sealed class Result {
         class Success(val questions: List<Question>) : Result()
         object Failure : Result()
     }
-
-    private var stackoverflowApi: StackOverflowApi = retrofit.create(StackOverflowApi::class.java)
 
     suspend fun fetchLatestQuestions(): Result {
         return withContext(Dispatchers.IO) {
