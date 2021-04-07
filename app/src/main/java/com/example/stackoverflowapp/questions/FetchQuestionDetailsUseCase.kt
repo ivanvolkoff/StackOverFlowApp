@@ -1,13 +1,9 @@
 package com.example.stackoverflowapp.questions
 
-import com.example.stackoverflowapp.Constants
 import com.example.stackoverflowapp.networking.StackOverflowApi
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class FetchQuestionDetailsUseCase(
     private val stackoverflowApi: StackOverflowApi

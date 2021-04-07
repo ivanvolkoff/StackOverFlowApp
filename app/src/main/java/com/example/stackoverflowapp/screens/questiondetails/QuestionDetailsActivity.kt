@@ -29,8 +29,8 @@ class QuestionDetailsActivity : BaseActivity(), QuestionDetailsViewMvc.Listener 
         setContentView(questionDetailsMvc.rootView)
         fetchQuestionDetailsUseCase = compositionRoot.fetchQuestionDetailsUseCase
         questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
-        dialogsNavigator = DialogsNavigator(supportFragmentManager)
-        screensNavigator = ScreensNavigator(this)
+        dialogsNavigator = compositionRoot.dialogsNavigator
+        screensNavigator = compositionRoot.screensNavigator
     }
 
     override fun onStart() {

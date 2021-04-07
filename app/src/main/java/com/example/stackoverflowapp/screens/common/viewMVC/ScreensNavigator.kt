@@ -1,7 +1,6 @@
 package com.example.stackoverflowapp.screens.common.viewMVC
 
 import android.app.Activity
-import android.content.Context
 import com.example.stackoverflowapp.screens.questiondetails.QuestionDetailsActivity
 
 class ScreensNavigator (private val activity: Activity){

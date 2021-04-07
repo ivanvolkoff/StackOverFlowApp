@@ -1,11 +1,8 @@
 package com.example.stackoverflowapp.questions
 
-import com.example.stackoverflowapp.Constants
 import com.example.stackoverflowapp.networking.StackOverflowApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.coroutines.cancellation.CancellationException
 
 class FetchQuestionsUseCase(
