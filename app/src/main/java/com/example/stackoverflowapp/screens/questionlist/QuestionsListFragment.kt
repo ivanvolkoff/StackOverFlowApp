@@ -25,11 +25,9 @@ class QuestionsListFragment : BaseFragmet() , QuestionsListViewMvc.Listener{
         fetchQuestionsUseCase = compositionRoot.fetchQuestionsUseCase
         screensNavigator = compositionRoot.screensNavigator
         dialogsNavigator = compositionRoot.dialogsNavigator
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         viewMvc = QuestionsListViewMvc(LayoutInflater.from(requireContext()), container)
         return viewMvc.rootView
     }
