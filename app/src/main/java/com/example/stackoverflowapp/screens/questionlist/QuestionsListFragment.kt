@@ -13,8 +13,6 @@ import kotlinx.coroutines.*
 
 class QuestionsListFragment : BaseFragmet() , QuestionsListViewMvc.Listener{
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
-
-
     private var isDataLoaded = false
     private lateinit var viewMvc: QuestionsListViewMvc
     private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
@@ -28,7 +26,7 @@ class QuestionsListFragment : BaseFragmet() , QuestionsListViewMvc.Listener{
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewMvc = QuestionsListViewMvc(LayoutInflater.from(requireContext()), container)
+        viewMvc = compositionRoot.viewMvcFactory.newQuestionListViewMvcFactory(container)
         return viewMvc.rootView
     }
 
