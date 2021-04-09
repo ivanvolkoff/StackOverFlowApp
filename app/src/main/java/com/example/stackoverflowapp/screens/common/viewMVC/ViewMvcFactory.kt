@@ -10,7 +10,7 @@ class ViewMvcFactory(val layoutInflater: LayoutInflater) {
     fun newQuestionListViewMvcFactory(viewGroup: ViewGroup?): QuestionsListViewMvc{
         return  QuestionsListViewMvc(layoutInflater,viewGroup)
     }
-    fun newQuestiopnDetailsViewMvcFactory():QuestionDetailsViewMvc{
-        return QuestionDetailsViewMvc(layoutInflater,null)
+    fun newQuestiopnDetailsViewMvcFactory(viewGroup: ViewGroup?):QuestionDetailsViewMvc{
+        return QuestionDetailsViewMvc(layoutInflater,viewGroup)
     }
 }

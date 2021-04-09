@@ -2,7 +2,7 @@ package com.example.stackoverflowapp.screens.questionlist
 
 import android.os.Bundle
 import com.example.stackoverflowapp.R
-import com.example.stackoverflowapp.screens.common.activities.BaseActivity
+import com.example.stackoverflowapp.screens.common.BaseActivity
 
 class QuestionsListActivity : BaseActivity() {
 

@@ -1,8 +1,11 @@
 package com.example.stackoverflowapp.screens.common.fragments
 
 import androidx.fragment.app.Fragment
-import com.example.stackoverflowapp.screens.common.activities.BaseActivity
+import com.example.stackoverflowapp.common.di.Injector
+import com.example.stackoverflowapp.common.di.PresentationCompositionRoot
+import com.example.stackoverflowapp.screens.common.BaseActivity
 
 open class BaseFragmet:Fragment() {
-    protected val compositionRoot get() = (requireActivity()as BaseActivity).compositionRoot
+    private val compositionRoot get() = PresentationCompositionRoot((requireActivity() as BaseActivity).activityCompositionRoot)
+    protected val injector get() = Injector(compositionRoot)
 }

@@ -3,34 +3,31 @@ package com.example.stackoverflowapp.screens.questiondetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
-import com.example.stackoverflowapp.screens.common.activities.BaseActivity
+import com.example.stackoverflowapp.screens.common.BaseActivity
 import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
 import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
+import com.example.stackoverflowapp.screens.common.viewMVC.ViewMvcFactory
 import kotlinx.coroutines.*
 
 class QuestionDetailsActivity : BaseActivity(), QuestionDetailsViewMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    private lateinit var questionDetailsMvc: QuestionDetailsViewMvc
+     lateinit var questionDetailsMvc: QuestionDetailsViewMvc
 
-    private lateinit var questionId: String
+     lateinit var questionId: String
 
-    private lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
-
-    private lateinit var dialogsNavigator: DialogsNavigator
-    private lateinit var screensNavigator: ScreensNavigator
+     lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
+     lateinit var viewMvcFactory: ViewMvcFactory
+     lateinit var dialogsNavigator: DialogsNavigator
+     lateinit var screensNavigator: ScreensNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        injector.inject(this)
         super.onCreate(savedInstanceState)
-        questionDetailsMvc = compositionRoot.viewMvcFactory.newQuestiopnDetailsViewMvcFactory()
         setContentView(questionDetailsMvc.rootView)
-        fetchQuestionDetailsUseCase = compositionRoot.fetchQuestionDetailsUseCase
         questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
-        dialogsNavigator = compositionRoot.dialogsNavigator
-        screensNavigator = compositionRoot.screensNavigator
     }
 
     override fun onStart() {

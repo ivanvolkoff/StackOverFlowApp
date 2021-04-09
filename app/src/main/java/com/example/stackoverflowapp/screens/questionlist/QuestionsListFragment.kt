@@ -9,24 +9,31 @@ import com.example.stackoverflowapp.questions.Question
 import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
 import com.example.stackoverflowapp.screens.common.fragments.BaseFragmet
 import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
+import com.example.stackoverflowapp.screens.common.viewMVC.ViewMvcFactory
 import kotlinx.coroutines.*
 
-class QuestionsListFragment : BaseFragmet() , QuestionsListViewMvc.Listener{
+class QuestionsListFragment : BaseFragmet(), QuestionsListViewMvc.Listener {
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+
     private var isDataLoaded = false
+
     private lateinit var viewMvc: QuestionsListViewMvc
-    private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
-    private lateinit var dialogsNavigator: DialogsNavigator
-    private lateinit var screensNavigator: ScreensNavigator
+    lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
+    lateinit var dialogsNavigator: DialogsNavigator
+    lateinit var screensNavigator: ScreensNavigator
+    lateinit var viewMvcFactory: ViewMvcFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fetchQuestionsUseCase = compositionRoot.fetchQuestionsUseCase
-        screensNavigator = compositionRoot.screensNavigator
-        dialogsNavigator = compositionRoot.dialogsNavigator
+        injector.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewMvc = compositionRoot.viewMvcFactory.newQuestionListViewMvcFactory(container)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        viewMvc = viewMvcFactory.newQuestionListViewMvcFactory(container)
         return viewMvc.rootView
     }
 

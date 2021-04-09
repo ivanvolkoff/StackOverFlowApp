@@ -1,4 +1,4 @@
-package com.example.stackoverflowapp.common.composition
+package com.example.stackoverflowapp.common.di
 
 import androidx.annotation.UiThread
 import com.example.stackoverflowapp.Constants
