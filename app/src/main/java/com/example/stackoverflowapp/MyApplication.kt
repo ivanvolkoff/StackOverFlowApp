@@ -1,16 +1,17 @@
 package com.example.stackoverflowapp
 
 import android.app.Application
-import androidx.fragment.app.FragmentManager
-import com.example.stackoverflowapp.common.di.AppCompositionRoot
+import com.example.stackoverflowapp.common.di.AppModule
+import com.example.stackoverflowapp.common.di.DaggerAppComponent
 
 class MyApplication : Application() {
 
-     lateinit var appCompositionRoot: AppCompositionRoot
-     lateinit var supportFragmentManager: FragmentManager
+    public val appComponent by lazy {
+        DaggerAppComponent.builder().appModule(AppModule(this)).build()
+    }
 
     override fun onCreate() {
-        appCompositionRoot = AppCompositionRoot()
+
         super.onCreate()
     }
 

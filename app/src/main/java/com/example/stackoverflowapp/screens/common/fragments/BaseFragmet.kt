@@ -1,11 +1,17 @@
 package com.example.stackoverflowapp.screens.common.fragments
 
 import androidx.fragment.app.Fragment
+import com.example.stackoverflowapp.common.di.DaggerPresentacionComponent
 import com.example.stackoverflowapp.common.di.Injector
-import com.example.stackoverflowapp.common.di.PresentationCompositionRoot
+import com.example.stackoverflowapp.common.di.PresentationModule
 import com.example.stackoverflowapp.screens.common.BaseActivity
 
-open class BaseFragmet:Fragment() {
-    private val compositionRoot get() = PresentationCompositionRoot((requireActivity() as BaseActivity).activityCompositionRoot)
-    protected val injector get() = Injector(compositionRoot)
+open class BaseFragment : Fragment() {
+
+    private val presentationComponent by lazy {
+        DaggerPresentacionComponent.builder()
+            .presentationModule(PresentationModule((requireActivity() as BaseActivity).activityComponent))
+            .build()
+    }
+    protected val injector get() = Injector(presentationComponent)
 }

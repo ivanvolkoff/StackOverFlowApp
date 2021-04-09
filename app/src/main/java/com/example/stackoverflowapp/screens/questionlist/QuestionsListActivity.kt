@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.example.stackoverflowapp.R
 import com.example.stackoverflowapp.screens.common.BaseActivity
 
+
 class QuestionsListActivity : BaseActivity() {
 
 
