@@ -1,4 +1,4 @@
-package com.example.stackoverflowapp.common.di
+package com.example.stackoverflowapp.common.di.presentation
 
 import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
 import com.example.stackoverflowapp.questions.FetchQuestionsUseCase

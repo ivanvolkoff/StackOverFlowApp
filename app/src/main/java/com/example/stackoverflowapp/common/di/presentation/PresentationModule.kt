@@ -1,7 +1,8 @@
-package com.example.stackoverflowapp.common.di
+package com.example.stackoverflowapp.common.di.presentation
 
 import android.view.LayoutInflater
 import androidx.fragment.app.FragmentManager
+import com.example.stackoverflowapp.common.di.activity.ActivityComponent
 import com.example.stackoverflowapp.networking.StackOverflowApi
 import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
 import com.example.stackoverflowapp.questions.FetchQuestionsUseCase

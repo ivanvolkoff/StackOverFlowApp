@@ -3,6 +3,10 @@ package com.example.stackoverflowapp.screens.common
 import androidx.appcompat.app.AppCompatActivity
 import com.example.stackoverflowapp.MyApplication
 import com.example.stackoverflowapp.common.di.*
+import com.example.stackoverflowapp.common.di.activity.ActivityModule
+import com.example.stackoverflowapp.common.di.activity.DaggerActivityComponent
+import com.example.stackoverflowapp.common.di.presentation.DaggerPresentacionComponent
+import com.example.stackoverflowapp.common.di.presentation.PresentationModule
 
 open class BaseActivity : AppCompatActivity() {
     private val appCompositionRoot get() = (application as MyApplication).appComponent

@@ -1,8 +1,8 @@
 package com.example.stackoverflowapp
 
 import android.app.Application
-import com.example.stackoverflowapp.common.di.AppModule
-import com.example.stackoverflowapp.common.di.DaggerAppComponent
+import com.example.stackoverflowapp.common.di.application.AppModule
+import com.example.stackoverflowapp.common.di.application.DaggerAppComponent
 
 class MyApplication : Application() {
 

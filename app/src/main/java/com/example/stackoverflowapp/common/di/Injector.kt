@@ -1,5 +1,6 @@
 package com.example.stackoverflowapp.common.di
 
+import com.example.stackoverflowapp.common.di.presentation.PresentacionComponent
 import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
 import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
 import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator

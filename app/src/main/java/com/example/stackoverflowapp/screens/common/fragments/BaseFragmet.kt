@@ -1,9 +1,9 @@
 package com.example.stackoverflowapp.screens.common.fragments
 
 import androidx.fragment.app.Fragment
-import com.example.stackoverflowapp.common.di.DaggerPresentacionComponent
 import com.example.stackoverflowapp.common.di.Injector
-import com.example.stackoverflowapp.common.di.PresentationModule
+import com.example.stackoverflowapp.common.di.presentation.DaggerPresentacionComponent
+import com.example.stackoverflowapp.common.di.presentation.PresentationModule
 import com.example.stackoverflowapp.screens.common.BaseActivity
 
 open class BaseFragment : Fragment() {
