@@ -40,8 +40,8 @@
 
                         <ImageView
                             android:id="@+id/user_image"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_gravity="end" />
 
                         <TextView
@@ -61,7 +61,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="60dp"
+                        android:layout_marginTop="105dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="20dp"
                         android:textSize="20sp" />
