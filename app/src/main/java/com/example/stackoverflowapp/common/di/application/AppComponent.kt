@@ -1,13 +1,16 @@
 package com.example.stackoverflowapp.common.di.application
 
 import android.app.Application
+import com.example.stackoverflowapp.common.di.activity.ActivityComponent
+import com.example.stackoverflowapp.common.di.activity.ActivityModule
 import com.example.stackoverflowapp.networking.StackOverflowApi
 import dagger.Component
+import dagger.Provides
 import javax.inject.Singleton
 
-@Singleton
+@AppScope
 @Component(modules = [AppModule::class])
 interface AppComponent {
-    fun application(): Application
-    fun stackOverFlowApi(): StackOverflowApi
+
+   fun newActivityComponent(activityModule: ActivityModule): ActivityComponent
 }

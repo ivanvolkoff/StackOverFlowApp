@@ -3,25 +3,25 @@ package com.example.stackoverflowapp.screens.questiondetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.example.stackoverflowapp.common.di.Service
 import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
-import com.example.stackoverflowapp.screens.common.BaseActivity
+import com.example.stackoverflowapp.screens.common.activities.BaseActivity
 import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
 import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
 import com.example.stackoverflowapp.screens.common.viewMVC.ViewMvcFactory
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 class QuestionDetailsActivity : BaseActivity(), QuestionDetailsViewMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    @field:Service
+    @Inject
     lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
-    @field:Service
+    @Inject
     lateinit var viewMvcFactory: ViewMvcFactory
-    @field:Service
+    @Inject
     lateinit var dialogsNavigator: DialogsNavigator
-    @field:Service
+    @Inject
     lateinit var screensNavigator: ScreensNavigator
 
     lateinit var questionId: String

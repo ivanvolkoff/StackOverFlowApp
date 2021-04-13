@@ -1,17 +1,14 @@
 package com.example.stackoverflowapp.common.di.presentation
 
-import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
-import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
-import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
-import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
-import com.example.stackoverflowapp.screens.common.viewMVC.ViewMvcFactory
+import com.example.stackoverflowapp.common.di.activity.ActivityComponent
+import com.example.stackoverflowapp.screens.questiondetails.QuestionDetailsActivity
+import com.example.stackoverflowapp.screens.questionlist.QuestionsListFragment
 import dagger.Component
+import dagger.Subcomponent
 
-@Component(modules = [PresentationModule::class])
-interface PresentacionComponent {
-    fun viewMvcFactory(): ViewMvcFactory
-    fun screensNavigator(): ScreensNavigator
-    fun dialogsNavigator(): DialogsNavigator
-    fun fetchQuestionsUseCase(): FetchQuestionsUseCase
-    fun fetchQuestionDetailsUseCase(): FetchQuestionDetailsUseCase
+@PresentationScope
+@Subcomponent(modules = [PresentationModule::class,UseCaseModule::class])
+interface PresentationComponent {
+    fun inject(fragment:QuestionsListFragment)
+    fun inject(activity: QuestionDetailsActivity)
 }

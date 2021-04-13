@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.stackoverflowapp.common.di.Service
 import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
 import com.example.stackoverflowapp.questions.Question
 import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
@@ -12,6 +11,7 @@ import com.example.stackoverflowapp.screens.common.fragments.BaseFragment
 import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
 import com.example.stackoverflowapp.screens.common.viewMVC.ViewMvcFactory
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -19,10 +19,14 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
     private var isDataLoaded = false
 
     private lateinit var viewMvc: QuestionsListViewMvc
-    @field:Service lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
-    @field:Service lateinit var dialogsNavigator: DialogsNavigator
-    @field:Service lateinit var screensNavigator: ScreensNavigator
-    @field:Service lateinit var viewMvcFactory: ViewMvcFactory
+    @Inject
+    lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
+    @Inject
+    lateinit var dialogsNavigator: DialogsNavigator
+    @Inject
+    lateinit var screensNavigator: ScreensNavigator
+    @Inject
+    lateinit var viewMvcFactory: ViewMvcFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

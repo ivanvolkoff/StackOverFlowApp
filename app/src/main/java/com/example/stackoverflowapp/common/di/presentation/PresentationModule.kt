@@ -12,21 +12,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PresentationModule(private val activityComponent: ActivityComponent) {
-    @Provides
-    fun layoutInflater() = activityComponent.layoutInflater()
-
-    @Provides
-    fun fragmentManager() = activityComponent.fragmentManager()
-
-    @Provides
-    fun stackoverflowApi() = activityComponent.stackOverflowApi()
-
-    @Provides
-    fun activity() = activityComponent.activity()
-
-    @Provides
-    fun screensNavigator() = activityComponent.screensNavigator()
+class PresentationModule() {
 
     @Provides
     fun viewMvcFactory(layoutInflater: LayoutInflater) = ViewMvcFactory(layoutInflater)
@@ -34,11 +20,6 @@ class PresentationModule(private val activityComponent: ActivityComponent) {
     @Provides
     fun dialogsNavigator(fragmentManager: FragmentManager) = DialogsNavigator(fragmentManager)
 
-    @Provides
-    fun fetchQuestionsUseCase(stackOverflowApi: StackOverflowApi) =
-        FetchQuestionsUseCase(stackOverflowApi)
 
-    @Provides
-    fun fetchQuestionDetailsUseCase(stackOverflowApi: StackOverflowApi) =
-        FetchQuestionDetailsUseCase(stackOverflowApi)
+
 }

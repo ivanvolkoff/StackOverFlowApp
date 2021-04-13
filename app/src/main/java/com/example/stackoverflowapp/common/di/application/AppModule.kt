@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class AppModule(private val application: Application) {
 
     @Provides
-    @Singleton
+    @AppScope
     fun retrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
@@ -25,7 +25,7 @@ class AppModule(private val application: Application) {
     @Provides
     fun application() = application
 
-    @Singleton
+    @AppScope
     @Provides
     fun stackOverflowApi(retrofit: Retrofit) = retrofit.create(StackOverflowApi::class.java)
 

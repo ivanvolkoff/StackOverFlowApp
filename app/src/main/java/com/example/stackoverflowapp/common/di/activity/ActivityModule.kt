@@ -9,18 +9,11 @@ import dagger.Provides
 
 @Module
 class ActivityModule(
-    val activity: AppCompatActivity,
-    private val appComponent: AppComponent
+    val activity: AppCompatActivity
 ) {
-
-
-
-
     @Provides
     fun activity()= activity
 
-    @Provides
-    fun application() = appComponent.application()
 
     @Provides
     @ActivityScope
@@ -32,6 +25,4 @@ class ActivityModule(
     @Provides
     fun fragmentManager() = activity.supportFragmentManager
 
-    @Provides
-    fun stackoverflowApi() = appComponent.stackOverFlowApi()
 }
