@@ -13,4 +13,6 @@ interface PresentationComponent {
     fun inject(fragment: QuestionsListFragment)
     fun inject(activity: QuestionDetailsActivity)
     fun inject(questionsListActivity: QuestionsListActivity)
+
+
 }
