@@ -7,10 +7,11 @@ import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
-class AppModule(private val application: Application) {
+class AppModule @Inject constructor( val application: Application) {
 
     @Provides
     @AppScope
@@ -21,9 +22,6 @@ class AppModule(private val application: Application) {
             .build()
     }
 
-
-    @Provides
-    fun application() = application
 
     @AppScope
     @Provides

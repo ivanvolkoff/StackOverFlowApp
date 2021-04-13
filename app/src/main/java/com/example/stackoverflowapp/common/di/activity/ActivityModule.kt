@@ -6,14 +6,14 @@ import com.example.stackoverflowapp.common.di.application.AppComponent
 import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
 import dagger.Module
 import dagger.Provides
+import javax.inject.Inject
 
 @Module
 class ActivityModule(
     val activity: AppCompatActivity
 ) {
     @Provides
-    fun activity()= activity
-
+    fun activity() = activity
 
     @Provides
     @ActivityScope

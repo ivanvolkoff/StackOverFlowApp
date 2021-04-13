@@ -1,6 +1,7 @@
 package com.example.stackoverflowapp.screens.questionlist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injector.inject(this)
+        Log.e("QuestionsListFragment","$screensNavigator")
     }
 
     override fun onCreateView(

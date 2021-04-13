@@ -3,9 +3,10 @@ package com.example.stackoverflowapp.questions
 import com.example.stackoverflowapp.networking.StackOverflowApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
-class FetchQuestionsUseCase(
+class FetchQuestionsUseCase @Inject constructor(
     private val stackoverflowApi: StackOverflowApi
 ) {
     sealed class Result {
