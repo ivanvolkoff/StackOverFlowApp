@@ -14,6 +14,6 @@ import javax.inject.Singleton
 @Component(modules = [AppModule::class])
 interface AppComponent {
 
-   fun newActivityComponent(activityModule: ActivityModule): ActivityComponent
+   fun newActivityComponent(): ActivityComponent.Builder
    fun newServiceComponent(serviceModule: ServiceModule): ServiceComponent
 }
