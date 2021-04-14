@@ -8,22 +8,18 @@ import dagger.Provides
 import javax.inject.Inject
 
 @Module
-class ActivityModule() {
+object ActivityModule {
 
 
-    companion object{
+    @Provides
+    @ActivityScope
+    fun screensNavigator(activity: AppCompatActivity) = ScreensNavigator(activity)
 
-        @Provides
-        @ActivityScope
-        fun screensNavigator(activity: AppCompatActivity) = ScreensNavigator(activity)
+    @Provides
+    fun layoutInflater(activity: AppCompatActivity) = LayoutInflater.from(activity)
 
-        @Provides
-        fun layoutInflater(activity: AppCompatActivity) = LayoutInflater.from(activity)
-
-        @Provides
-        fun fragmentManager(activity: AppCompatActivity) = activity.supportFragmentManager
-    }
-
+    @Provides
+    fun fragmentManager(activity: AppCompatActivity) = activity.supportFragmentManager
 
 
 }
