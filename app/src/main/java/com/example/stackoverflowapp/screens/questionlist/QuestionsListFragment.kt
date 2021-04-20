@@ -9,8 +9,8 @@ import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
 import com.example.stackoverflowapp.questions.Question
 import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
 import com.example.stackoverflowapp.screens.common.fragments.BaseFragment
-import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
-import com.example.stackoverflowapp.screens.common.viewMVC.ViewMvcFactory
+import com.example.stackoverflowapp.screens.common.ScreensNavigator
+import com.example.stackoverflowapp.screens.common.viewmvc.ViewMvcFactory
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -40,7 +40,7 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewMvc = viewMvcFactory.newQuestionListViewMvcFactory(container)
+        viewMvc = viewMvcFactory.newQuestionsListViewMvc(container)
         return viewMvc.rootView
     }
 
@@ -55,7 +55,7 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
     override fun onStop() {
         super.onStop()
         coroutineScope.coroutineContext.cancelChildren()
-        viewMvc.unRegisterListener(this)
+        viewMvc.unregisterListener(this)
     }
 
     private fun fetchQuestions() {
@@ -87,6 +87,10 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
 
     override fun onQuestionClicked(clickedQuestion: Question) {
         screensNavigator.toQuestionDetails(clickedQuestion.id)
+    }
+
+    override fun onViewModelClicked() {
+        screensNavigator.toViewModel()
     }
 
 

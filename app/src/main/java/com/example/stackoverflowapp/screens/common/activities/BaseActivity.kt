@@ -8,7 +8,9 @@ open class BaseActivity : AppCompatActivity() {
     private val appComponent get() = (application as MyApplication).appComponent
 
     val activityComponent by lazy {
-        appComponent.newActivityComponent().activity(this).activityModule(ActivityModule()).build()
+        appComponent.newActivityComponent()
+            .activity(this)
+            .build()
     }
     private val presentationComponent by lazy {
         activityComponent

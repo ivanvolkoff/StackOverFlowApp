@@ -11,30 +11,41 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.stackoverflowapp.R
 import com.example.stackoverflowapp.questions.Question
+import com.example.stackoverflowapp.screens.common.toolbar.MyToolbar
+import com.example.stackoverflowapp.screens.common.viewmvc.BaseViewMvc
 
 class QuestionsListViewMvc(
     private val layoutInflater: LayoutInflater,
     private val parent: ViewGroup?
+): BaseViewMvc<QuestionsListViewMvc.Listener>(
+    layoutInflater,
+    parent,
+    R.layout.activity_questions_list
 ) {
-    interface Listener{
+
+    interface Listener {
         fun onRefreshClicked()
         fun onQuestionClicked(clickedQuestion: Question)
+        fun onViewModelClicked()
     }
+
+    private val toolbar: MyToolbar
     private val swipeRefresh: SwipeRefreshLayout
     private val recyclerView: RecyclerView
     private val questionsAdapter: QuestionsAdapter
 
-    val rootView: View = layoutInflater.inflate(R.layout.activity_questions_list, parent, false)
-    private val context: Context get() = rootView.context
-
-    private val listeners = HashSet<Listener>()
-
     init {
 
+        toolbar = findViewById(R.id.toolbar)
+        toolbar.setViewModelListener {
+            for (listener in listeners) {
+                listener.onViewModelClicked()
+            }
+        }
         // init pull-down-to-refresh
         swipeRefresh = findViewById(R.id.swipeRefresh)
         swipeRefresh.setOnRefreshListener {
-            for(listener in listeners){
+            for (listener in listeners) {
                 listener.onRefreshClicked()
             }
         }
@@ -42,29 +53,33 @@ class QuestionsListViewMvc(
         // init recycler view
         recyclerView = findViewById(R.id.recycler)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        questionsAdapter = QuestionsAdapter { clickedQuestion ->
-            for (listener in listeners){
-                    listener.onQuestionClicked(clickedQuestion)
-        }
+        questionsAdapter = QuestionsAdapter{ clickedQuestion ->
+            for (listener in listeners) {
+                listener.onQuestionClicked(clickedQuestion)
+            }
         }
         recyclerView.adapter = questionsAdapter
     }
 
-    private fun <T:View?> findViewById(@IdRes id:Int):T{
-        return rootView.findViewById<T>(id)
+    fun bindQuestions(questions: List<Question>) {
+        questionsAdapter.bindData(questions)
     }
-    fun registerListener(listener: Listener){
-        listeners.add(listener)
+
+    fun showProgressIndication() {
+        swipeRefresh.isRefreshing = true
     }
-    fun unRegisterListener(listener: Listener){
-        listeners.remove(listener)
+
+    fun hideProgressIndication() {
+        if (swipeRefresh.isRefreshing) {
+            swipeRefresh.isRefreshing = false
+        }
     }
 
     class QuestionsAdapter(
         private val onQuestionClickListener: (Question) -> Unit
     ) : RecyclerView.Adapter<QuestionsAdapter.QuestionViewHolder>() {
 
-        private var questionsList: List<Question> = java.util.ArrayList(0)
+        private var questionsList: List<Question> = ArrayList(0)
 
         inner class QuestionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val title: TextView = view.findViewById(R.id.txt_title)
@@ -93,18 +108,4 @@ class QuestionsListViewMvc(
         }
 
     }
-     fun showProgressIndication() {
-        swipeRefresh.isRefreshing = true
-    }
-
-     fun hideProgressIndication() {
-        if (swipeRefresh.isRefreshing) {
-            swipeRefresh.isRefreshing = false
-        }
-    }
-
-    fun bindQuestions(questions: List<Question>) {
-        questionsAdapter.bindData(questions)
-    }
-
 }

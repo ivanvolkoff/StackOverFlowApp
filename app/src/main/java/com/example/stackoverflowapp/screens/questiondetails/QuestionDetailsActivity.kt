@@ -7,8 +7,8 @@ import android.util.Log
 import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
 import com.example.stackoverflowapp.screens.common.activities.BaseActivity
 import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
-import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
-import com.example.stackoverflowapp.screens.common.viewMVC.ViewMvcFactory
+import com.example.stackoverflowapp.screens.common.ScreensNavigator
+import com.example.stackoverflowapp.screens.common.viewmvc.ViewMvcFactory
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -31,7 +31,7 @@ class QuestionDetailsActivity : BaseActivity(), QuestionDetailsViewMvc.Listener 
         injector.inject(this)
         Log.e("QuestionDetailActiivty","$screensNavigator")
         super.onCreate(savedInstanceState)
-        viewMvc = viewMvcFactory.questionDetailsViewMvc(null)
+        viewMvc = viewMvcFactory.newQuestionDetailsViewMvc(null)
         setContentView(viewMvc.rootView)
         questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
     }
@@ -83,6 +83,6 @@ class QuestionDetailsActivity : BaseActivity(), QuestionDetailsViewMvc.Listener 
     }
 
     override fun onBackClicked() {
-        screensNavigator.navigateback()
+        screensNavigator.navigateBack()
     }
 }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.stackoverflowapp.R
 import com.example.stackoverflowapp.screens.common.activities.BaseActivity
-import com.example.stackoverflowapp.screens.common.viewMVC.ScreensNavigator
+import com.example.stackoverflowapp.screens.common.ScreensNavigator
 import javax.inject.Inject
 
 
