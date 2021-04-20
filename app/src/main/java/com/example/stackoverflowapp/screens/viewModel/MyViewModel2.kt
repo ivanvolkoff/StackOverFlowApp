@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 
-class MyViewModel @Inject constructor(
+class MyViewModel2 @Inject constructor(
     private val fetchQuestionsUseCase: FetchQuestionsUseCase
 ): ViewModel() {
 
@@ -26,7 +26,7 @@ class MyViewModel @Inject constructor(
         }
     }
 
-    class Factory @Inject constructor(private val myViewModelProvider:Provider<MyViewModel>):ViewModelProvider.Factory{
+    class Factory @Inject constructor(private val myViewModelProvider:Provider<MyViewModel2>):ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return myViewModelProvider.get() as T
         }

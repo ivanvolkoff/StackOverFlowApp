@@ -9,7 +9,7 @@ import dagger.Component
 import dagger.Subcomponent
 
 @PresentationScope
-@Subcomponent()
+@Subcomponent(modules = [VIewModelModule::class])
 interface PresentationComponent {
     fun inject(fragment: QuestionsListFragment)
     fun inject(activity: QuestionDetailsActivity)
