@@ -1,5 +1,6 @@
 package com.example.stackoverflowapp.screens.common.viewModelsFactory
 
+import android.view.View
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -14,11 +15,10 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class ViewModelFactory @Inject constructor(
-   private val fetchQuestionDetailsUseCaseProviders: Provider<FetchQuestionDetailsUseCase>,
-    private val fetchQuestionsUseCaseProvider: Provider<FetchQuestionsUseCase>,
+    private val providersMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>,
     savedStateRegistryOwner: SavedStateRegistryOwner
 ) :
-    AbstractSavedStateViewModelFactory(savedStateRegistryOwner,null) {
+    AbstractSavedStateViewModelFactory(savedStateRegistryOwner, null) {
 
 
     override fun <T : ViewModel?> create(
@@ -26,15 +26,13 @@ class ViewModelFactory @Inject constructor(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-       return when (modelClass){
-           MyViewModel::class.java ->{
-               MyViewModel(fetchQuestionsUseCaseProvider.get(),fetchQuestionDetailsUseCaseProviders.get(),handle) as T
-           }
-           MyViewModel2::class.java ->{
-               MyViewModel2(fetchQuestionsUseCaseProvider.get(),fetchQuestionDetailsUseCaseProviders.get(),handle)as T
-           }
-           else -> throw RuntimeException("Type mismatch for type: $modelClass")
-       }
+
+        val provider = providersMap[modelClass]
+        val viewModel = provider?.get() ?: throw RuntimeException("Unsupported viewModel type: $modelClass")
+        if (viewModel is SavedStateViewModel) {
+            viewModel.init(handle)
+        }
+        return viewModel as T
     }
 
 }

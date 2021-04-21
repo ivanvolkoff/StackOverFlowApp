@@ -1,4 +1,4 @@
-package com.example.stackoverflowapp.common.di.service
+package com.example.stackoverflowapp.common.di.presentation
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey
