@@ -1,6 +1,8 @@
 package com.example.stackoverflowapp.screens.viewModel
 
 import androidx.lifecycle.*
+import androidx.savedstate.SavedStateRegistryOwner
+import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
 import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
 import com.example.stackoverflowapp.questions.Question
 import kotlinx.coroutines.launch
@@ -9,7 +11,10 @@ import javax.inject.Provider
 
 
 class MyViewModel2 @Inject constructor(
-    private val fetchQuestionsUseCase: FetchQuestionsUseCase
+    private val fetchQuestionsUseCase: FetchQuestionsUseCase,
+    private val fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase,
+    private val savedStateRegistryOwner: SavedStateHandle
+
 ): ViewModel() {
 
     private val _questions = MutableLiveData<List<Question>>()

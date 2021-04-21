@@ -2,6 +2,7 @@ package com.example.stackoverflowapp.common.di.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.stackoverflowapp.common.di.presentation.PresentationComponent
+import com.example.stackoverflowapp.common.di.presentation.PresentationModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Subcomponent
@@ -10,7 +11,7 @@ import dagger.Subcomponent
 @Subcomponent(modules = [ActivityModule::class])
 interface ActivityComponent {
 
-    fun newPresentationComponent(): PresentationComponent
+    fun newPresentationComponent(presentationModule: PresentationModule): PresentationComponent
 
     @Subcomponent.Builder
     interface Builder{

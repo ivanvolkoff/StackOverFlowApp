@@ -1,6 +1,7 @@
 package com.example.stackoverflowapp.screens.viewModel
 
 import androidx.lifecycle.*
+import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
 import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
 import com.example.stackoverflowapp.questions.Question
 import kotlinx.coroutines.launch
@@ -9,10 +10,12 @@ import javax.inject.Provider
 
 
 class MyViewModel @Inject constructor(
-    private val fetchQuestionsUseCase: FetchQuestionsUseCase
+    private val fetchQuestionsUseCase: FetchQuestionsUseCase,
+    private val fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase,
+    private val savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
-    private val _questions = MutableLiveData<List<Question>>()
+    private val _questions:  MutableLiveData<List<Question>> = savedStateHandle.getLiveData("questions")
     val questions: LiveData<List<Question>> = _questions
 
     init {
