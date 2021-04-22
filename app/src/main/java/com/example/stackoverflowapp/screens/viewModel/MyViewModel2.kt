@@ -1,19 +1,21 @@
 package com.example.stackoverflowapp.screens.viewModel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.savedstate.SavedStateRegistryOwner
 import com.example.stackoverflowapp.questions.FetchQuestionDetailsUseCase
 import com.example.stackoverflowapp.questions.FetchQuestionsUseCase
 import com.example.stackoverflowapp.questions.Question
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Provider
 
 
-class MyViewModel2 @Inject constructor(
-    private val fetchQuestionsUseCase: FetchQuestionsUseCase,
-    private val fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase,
-    private val savedStateRegistryOwner: SavedStateHandle
+class MyViewModel2 @AssistedInject constructor(
+
+    private val fetchQuestionsUseCase: FetchQuestionsUseCase
 
 ): ViewModel() {
 
@@ -31,10 +33,4 @@ class MyViewModel2 @Inject constructor(
         }
     }
 
-    class Factory @Inject constructor(private val myViewModelProvider:Provider<MyViewModel2>):ViewModelProvider.Factory{
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return myViewModelProvider.get() as T
-        }
-
-    }
 }

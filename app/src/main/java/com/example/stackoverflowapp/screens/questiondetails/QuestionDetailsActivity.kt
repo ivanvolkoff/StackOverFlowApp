@@ -9,27 +9,31 @@ import com.example.stackoverflowapp.screens.common.activities.BaseActivity
 import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
 import com.example.stackoverflowapp.screens.common.ScreensNavigator
 import com.example.stackoverflowapp.screens.common.viewmvc.ViewMvcFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class QuestionDetailsActivity : BaseActivity(), QuestionDetailsViewMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     @Inject
     lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
+
     @Inject
     lateinit var viewMvcFactory: ViewMvcFactory
+
     @Inject
     lateinit var dialogsNavigator: DialogsNavigator
+
     @Inject
     lateinit var screensNavigator: ScreensNavigator
 
     lateinit var questionId: String
     lateinit var viewMvc: QuestionDetailsViewMvc
     override fun onCreate(savedInstanceState: Bundle?) {
-        injector.inject(this)
-        Log.e("QuestionDetailActiivty","$screensNavigator")
+        Log.e("QuestionDetailActiivty", "$screensNavigator")
         super.onCreate(savedInstanceState)
         viewMvc = viewMvcFactory.newQuestionDetailsViewMvc(null)
         setContentView(viewMvc.rootView)

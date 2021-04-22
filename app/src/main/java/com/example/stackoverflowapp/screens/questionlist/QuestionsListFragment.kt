@@ -11,28 +11,33 @@ import com.example.stackoverflowapp.screens.common.dialogs.DialogsNavigator
 import com.example.stackoverflowapp.screens.common.fragments.BaseFragment
 import com.example.stackoverflowapp.screens.common.ScreensNavigator
 import com.example.stackoverflowapp.screens.common.viewmvc.ViewMvcFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     private var isDataLoaded = false
 
     private lateinit var viewMvc: QuestionsListViewMvc
+
     @Inject
     lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
+
     @Inject
     lateinit var dialogsNavigator: DialogsNavigator
+
     @Inject
     lateinit var screensNavigator: ScreensNavigator
+
     @Inject
     lateinit var viewMvcFactory: ViewMvcFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        injector.inject(this)
-        Log.e("QuestionsListFragment","$screensNavigator")
+        Log.e("QuestionsListFragment", "$screensNavigator")
     }
 
     override fun onCreateView(

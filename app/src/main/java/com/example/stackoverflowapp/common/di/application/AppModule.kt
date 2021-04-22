@@ -1,20 +1,20 @@
 package com.example.stackoverflowapp.common.di.application
 
-import android.app.Application
-import com.example.stackoverflowapp.Constants
 import com.example.stackoverflowapp.common.di.Retrofit1
 import com.example.stackoverflowapp.common.di.Retrofit2
 import com.example.stackoverflowapp.networking.StackOverflowApi
 import com.example.stackoverflowapp.networking.UrlProvider
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
-import javax.inject.Singleton
 
 @Module
-class AppModule @Inject constructor( val application: Application) {
+@InstallIn(SingletonComponent::class)
+class AppModule() {
 
     @Provides
     @AppScope
@@ -40,8 +40,6 @@ class AppModule @Inject constructor( val application: Application) {
     @Provides
     fun urlProvider() = UrlProvider()
 
-    @Provides
-    fun application() = application
 
     @Provides
     @AppScope
